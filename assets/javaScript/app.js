@@ -36,16 +36,24 @@ var config = {
   	});
   });
 
-  database.ref().on("child-added", function(childSnapshot) {
+  database.ref().on("child_added", function(childSnapshot) {
   	var addedTrainName = childSnapshot.val().trainName;
   	var addedDestination = childSnapshot.val().destination;
   	var addedTrainTime = childSnapshot.val().trainTime;
   	var addedFrequency = childSnapshot.val().frequency;
 
-  	var minsAway = ;
+  	var minsAway = 3;
 
-  	$("#employee-table > tbody").append("<tr><td>" + empName + "</td><td>" + empRole + "</td><td>" +
-  		empStartPretty + "</td><td>" + empMonths + "</td><td>" + empRate + "</td><td>" + empBilled + "</td></tr>");
+  	var newTable = $("<table>");
+
+  	$(newTable).attr("id", "schedule");
+
+  	$("#trainInfo").append(newTable);
+
+
+
+  	$("#schedule").append("<tr><td>" + addedTrainName + "</td><td>" + addedDestination + "</td><td>" +
+  		addedTrainTime + "</td><td>" + addedFrequency + "</td><td>" + minsAway + "</td></tr>");
 
   });
 
