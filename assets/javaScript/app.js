@@ -37,28 +37,32 @@ var config = {
   });
 
   database.ref().on("child_added", function(childSnapshot) {
-  	var addedTrainName = childSnapshot.val().name;
-  	var addedDestination = childSnapshot.val().destination;
-  	var addedFrequency = childSnapshot.val().frequency;
-  	var addedTrainTime = childSnapshot.val().time;
-  	console.log(addedTrainTime);
+      var addedTrainName = childSnapshot.val().name;
+      var addedDestination = childSnapshot.val().destination;
+      var addedFrequency = childSnapshot.val().frequency;
+      var addedTrainTime = childSnapshot.val().time;
 
-  	var trainTimeConverted = moment(addedTrainTime, "hh:mm").subtract(1, "years");
-  	console.log(trainTimeConverted._i);
+    var timeArr = addedTrainTime.split(":");
+    var trainTime = moment().hours(timeArr[0]).minutes(timeArr[1]);
+    var maxMoment = moment.max(moment(), trainTime);
+    var tMinutes;
+    var tArrival;
 
-  	var currenTime = moment();
+    if (maxMoment === trainTime) {
+        tArrival = trainTime.format("hh:mm A");
+        tMinutes = trainTime.diff(moment(), "minutes");
+    } else {
+        var differenceTimes = moment().diff(trainTime, "minutes");
+        var tRemainder = differenceTimes % addedFrequency;
+        tMinutes = addedFrequency - tRemainder;
+        // To calculate the arrival time, add the tMinutes to the currrent time
+        tArrival = moment().add(tMinutes, "m").format("hh:mm A");
 
-  	var diffTime = moment().diff(moment(addedTrainTime), "mintues");
-  	console.log(diffTime);
 
-  	var tRemainder = diffTime % addedFrequency;	
-  	console.log(tRemainder);
+      $("#schedule").append("<tr><td>" + addedTrainName + "</td><td>" + addedDestination + "</td><td>" +
+          addedFrequency  + "</td><td>" + tArrival + "</td><td>" + tMinutes + "</td></tr>");
+  }
 
-  	var minsAway = addedFrequency - tRemainder;
-		console.log(minsAway);
-
-  	$("#schedule").append("<tr><td>" + addedTrainName + "</td><td>" + addedDestination + "</td><td>" +
-  		addedFrequency  + "</td><td>" + addedTrainTime + "</td><td>" + minsAway + "</td></tr>");
 
   });
 
