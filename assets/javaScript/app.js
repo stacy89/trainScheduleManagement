@@ -20,9 +20,9 @@ var config = {
 
   	trainName = $("#trainName").val().trim();
   	destination = $("#destination").val().trim();
-  	trainTime = moment($("#trainTime").val().trim(), " hh:mm A").format(" hh:mm A");
+  	trainTime = moment($("#trainTime").val().trim(), " hh:mm").format("hh:mm");
   	frequency = $("#frequency").val().trim();
-  	
+
   	$("#trainName").val("");
   	$("#destination").val("");
   	$("#trainTime").val("");
@@ -37,23 +37,28 @@ var config = {
   });
 
   database.ref().on("child_added", function(childSnapshot) {
-  	var addedTrainName = childSnapshot.val().trainName;
+  	var addedTrainName = childSnapshot.val().name;
   	var addedDestination = childSnapshot.val().destination;
-  	var addedTrainTime = childSnapshot.val().trainTime;
   	var addedFrequency = childSnapshot.val().frequency;
+  	var addedTrainTime = childSnapshot.val().time;
+  	console.log(addedTrainTime);
+  	
+  	var trainTimeConverted = moment(addedTrainTime, "hh:mm").subtract(1, "years");
+  	console.log(trainTimeConverted._i);
 
-  	var minsAway = 3;
+  	var currenTime = moment();
 
-  	var newTable = $("<table>");
+  	var diffTime = moment().diff(moment(addedTrainTime), "mintues");
+  	console.log(diffTime);
 
-  	$(newTable).attr("id", "schedule");
+  	var tRemainder = diffTime % addedFrequency;
+  	console.log(tRemainder);
 
-  	$("#trainInfo").append(newTable);
-
-
+  	var minsAway = addedFrequency - tRemainder;
+		console.log(minsAway);
 
   	$("#schedule").append("<tr><td>" + addedTrainName + "</td><td>" + addedDestination + "</td><td>" +
-  		addedTrainTime + "</td><td>" + addedFrequency + "</td><td>" + minsAway + "</td></tr>");
+  		addedFrequency  + "</td><td>" + addedTrainTime + "</td><td>" + minsAway + "</td></tr>");
 
   });
 
