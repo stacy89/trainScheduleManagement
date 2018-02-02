@@ -3,6 +3,7 @@
 <head>
 	<title>Hogwarts Train Schedule</title>
 	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+	<link href="https://fonts.googleapis.com/css?family=Jim+Nightshade|UnifrakturMaguntia" rel="stylesheet">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 	<script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
 	<script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
@@ -12,23 +13,22 @@
 <body>
 	<div class="jumbotron jumbotron-fluid">
   	<div class="container">
-    	<h1 class="display-4">Hogwarts Train Schedule</h1>
-    	<p class="lead">I'll add something later</p>
+    	<h1 class="display-4 header text-white">Train</h1>
   	</div>
 	</div>
 	
 	<div class="container">
-		<div class="card border-success mb-5">
-		  <div class="card-header">Current Train Schedule</div>
+		<div class="card bg-light mb-5">
+		  <div class="card-header header">Current Train Schedule</div>
 		  	<div id="trainInfo">
 		  		<table class="table text-center">
 					  <thead>
 					    <tr>
-					      <th scope="col">Train Name</th>
-					      <th scope="col">Destination</th>
-					      <th scope="col">Frequency</th>
-					      <th scope="col">Next Train Arrival</th>
-					      <th scope="col">Mintues Away</th>
+					      <th class="leadHeader" scope="col">Train Name</th>
+					      <th class="leadHeader" scope="col">Destination</th>
+					      <th class="leadHeader" scope="col">Frequency</th>
+					      <th class="leadHeader" scope="col">Next Train Arrival</th>
+					      <th class="leadHeader" scope="col">Mintues Away</th>
 					    </tr>
 					  </thead>
   					<tbody id="schedule" class="text-center">
@@ -37,26 +37,26 @@
 		  	</div>
 		  </div>
 
-			<div class="card border-success mb-5">
-			  <div class="card-header">Add Train</div>
+			<div class="card bg-light mb-5">
+			  <div class="card-header header">Add Train</div>
 				  <form class="p-3">
-					  <div class="form-group">
+					  <div class="form-group leadHeader">
 					    <label>Train Name</label>
 					    <input type="text" class="form-control" id="trainName">
 					  </div>
-					  <div class="form-group">
+					  <div class="form-group leadHeader">
 					    <label>Destination</label>
 					    <input type="text" class="form-control" id="destination">
 					  </div>
-					  <div class="form-group">
+					  <div class="form-group leadHeader">
 					    <label>First Train Time (hh:mm - military time)</label>
 					    <input type="text" class="form-control" id="trainTime">
 					  </div>
-					  <div class="form-group">
+					  <div class="form-group leadHeader">
 					    <label>Frequency (min)</label>
 					    <input type="text" class="form-control" id="frequency">
 					  </div>
-					  <button type="submit" id="submit" class="btn btn-success">Submit</button>
+					  <button type="submit" id="submit" class="btn btn-secondary">Submit</button>
 					</form>
 				</div>
 			</div>

@@ -42,7 +42,7 @@ var config = {
   	var addedFrequency = childSnapshot.val().frequency;
   	var addedTrainTime = childSnapshot.val().time;
   	console.log(addedTrainTime);
-  	
+
   	var trainTimeConverted = moment(addedTrainTime, "hh:mm").subtract(1, "years");
   	console.log(trainTimeConverted._i);
 
@@ -51,7 +51,7 @@ var config = {
   	var diffTime = moment().diff(moment(addedTrainTime), "mintues");
   	console.log(diffTime);
 
-  	var tRemainder = diffTime % addedFrequency;
+  	var tRemainder = diffTime % addedFrequency;	
   	console.log(tRemainder);
 
   	var minsAway = addedFrequency - tRemainder;

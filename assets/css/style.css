@@ -1,0 +1,20 @@
+/*body {
+	background-color: grey;
+}*/
+
+.jumbotron {
+	background: url("../images/hogwarts.png") center;
+	background-size: cover;
+}
+
+.header {
+	font-family: 'UnifrakturMaguntia', cursive;
+	font-size: 30px;
+	padding-top: 50px;
+	padding-left: 40px;
+}
+
+.leadHeader {
+	font-family: 'Jim Nightshade', cursive;
+	font-size: 20px;
+}
